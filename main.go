@@ -1,55 +1,36 @@
 /*
-Hands-on exercise #55 - embed struct
-	● Create a type engine struct, and include this field
-		○ electric bool
-	● Create a type vehicle struct, and include these fields
-		○ engine
-		○ make
-		○ model
-		○ doors
-		○ color
-	● Create two VALUES of TYPE vehicle
-		○ use a composite literal
-	● Print out each of these values.
-	● Print out a single field from each of these values.
+Hands-on exercise #56 - anonymous struct
+Create and use an anonymous struct with these fields:
+	● first string
+	● friends map[string]int
+	● favDrinks []string
+Print things
 */
 
 package main
 
 import "fmt"
 
-type engine struct {
-	electric bool
-}
-
-type vehicle struct {
-	engine
-	make   string
-	model  string
-	doors  int
-	colour string
-}
-
 func main() {
 
-	v1 := vehicle{
-		engine: engine{electric: true},
-		make:   "Ford",
-		model:  "Puma",
-		doors:  5,
-		colour: "Navy Blue",
-	}
-	fmt.Printf("%#v\n", v1)
-	fmt.Printf("Colour: %v\n", v1.colour)
-
-	v2 := vehicle{
-		engine: engine{electric: false},
-		make:   "Vauxhall",
-		model:  "Corsa",
-		doors:  2,
-		colour: "Silver",
+	p1 := struct {
+		first     string
+		friends   map[string]int
+		favDrinks []string
+	}{
+		first:     "James",
+		friends:   map[string]int{"Jenny": 27, "Q": 21, "M": 47},
+		favDrinks: []string{"Gin and Tonic", "Vodka", "Red Wine"},
 	}
 
-	fmt.Printf("%#v\n", v2)
-	fmt.Printf("Electric: %v\n", v2.electric)
+	fmt.Println(p1)
+
+	for k, friend := range p1.friends {
+		fmt.Println(p1.first, " - friend - ", k, friend)
+	}
+
+	for _, drink := range p1.favDrinks {
+		fmt.Println(p1.first, " - drink - ", drink)
+	}
+
 }
