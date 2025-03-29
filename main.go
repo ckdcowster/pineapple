@@ -1,55 +1,55 @@
 /*
-Hands-on exercise #54 - map struct
-Take the code from the previous exercise, then store the VALUES of type person in a map with
-the KEY of last name. Access each value in the map. Print out the values, ranging over the slice.
+Hands-on exercise #55 - embed struct
+	● Create a type engine struct, and include this field
+		○ electric bool
+	● Create a type vehicle struct, and include these fields
+		○ engine
+		○ make
+		○ model
+		○ doors
+		○ color
+	● Create two VALUES of TYPE vehicle
+		○ use a composite literal
+	● Print out each of these values.
+	● Print out a single field from each of these values.
 */
 
 package main
 
 import "fmt"
 
-type person struct {
-	firstName        string
-	lastName         string
-	favoriteIceCream []string
+type engine struct {
+	electric bool
+}
+
+type vehicle struct {
+	engine
+	make   string
+	model  string
+	doors  int
+	colour string
 }
 
 func main() {
 
-	jb := person{
-		firstName:        "James",
-		lastName:         "Bond",
-		favoriteIceCream: []string{"Vanilla", "Strawberry"},
+	v1 := vehicle{
+		engine: engine{electric: true},
+		make:   "Ford",
+		model:  "Puma",
+		doors:  5,
+		colour: "Navy Blue",
 	}
-	//fmt.Println(jb)
+	fmt.Printf("%#v\n", v1)
+	fmt.Printf("Colour: %v\n", v1.colour)
 
-	//for _, flavour := range jb.favoriteIceCream {
-	//	fmt.Printf("Favourite is %v\n", flavour)
-	//}
-
-	jm := person{
-		firstName: "Jenny",
-		lastName:  "Moneypenny",
-	}
-	//fmt.Println(jm)
-
-	jm.favoriteIceCream = append(jm.favoriteIceCream, "Mint", "Chocolate")
-
-	//for _, flavour := range jm.favoriteIceCream {
-	//	fmt.Printf("Favourite is %v\n", flavour)
-	//}
-
-	var myMap = make(map[string]person)
-	myMap[jb.lastName] = jb
-	myMap[jm.lastName] = jm
-	//fmt.Println(myMap)
-
-	for k, v := range myMap {
-		fmt.Printf("key: %v\t First: %v\t Last: %v\nFavourites: ", k, v.firstName, v.lastName)
-		for _, favourite := range v.favoriteIceCream {
-			fmt.Printf("%v\t", favourite)
-		}
-		fmt.Println()
+	v2 := vehicle{
+		engine: engine{electric: false},
+		make:   "Vauxhall",
+		model:  "Corsa",
+		doors:  2,
+		colour: "Silver",
 	}
 
+	fmt.Printf("%#v\n", v2)
+	fmt.Printf("Electric: %v\n", v2.electric)
 }
