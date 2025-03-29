@@ -1,12 +1,7 @@
 /*
-Hands-on exercise #53 - struct with slice
-Create your own type “person” which will have an underlying type of “struct” so that it can store
-the following data:
-	● first name
-	● last name
-	● favorite ice cream flavors
-Create two VALUES of TYPE person. Print out the values, ranging over the elements in the slice
-which stores the favorite flavors.
+Hands-on exercise #54 - map struct
+Take the code from the previous exercise, then store the VALUES of type person in a map with
+the KEY of last name. Access each value in the map. Print out the values, ranging over the slice.
 */
 
 package main
@@ -26,22 +21,35 @@ func main() {
 		lastName:         "Bond",
 		favoriteIceCream: []string{"Vanilla", "Strawberry"},
 	}
-	fmt.Println(jb)
+	//fmt.Println(jb)
 
-	for _, flavour := range jb.favoriteIceCream {
-		fmt.Printf("Favourite is %v\n", flavour)
-	}
+	//for _, flavour := range jb.favoriteIceCream {
+	//	fmt.Printf("Favourite is %v\n", flavour)
+	//}
 
 	jm := person{
 		firstName: "Jenny",
 		lastName:  "Moneypenny",
 	}
-	fmt.Println(jm)
+	//fmt.Println(jm)
 
 	jm.favoriteIceCream = append(jm.favoriteIceCream, "Mint", "Chocolate")
 
-	for _, flavour := range jm.favoriteIceCream {
-		fmt.Printf("Favourite is %v\n", flavour)
+	//for _, flavour := range jm.favoriteIceCream {
+	//	fmt.Printf("Favourite is %v\n", flavour)
+	//}
+
+	var myMap = make(map[string]person)
+	myMap[jb.lastName] = jb
+	myMap[jm.lastName] = jm
+	//fmt.Println(myMap)
+
+	for k, v := range myMap {
+		fmt.Printf("key: %v\t First: %v\t Last: %v\nFavourites: ", k, v.firstName, v.lastName)
+		for _, favourite := range v.favoriteIceCream {
+			fmt.Printf("%v\t", favourite)
+		}
+		fmt.Println()
 	}
 
 }
